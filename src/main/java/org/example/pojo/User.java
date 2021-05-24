@@ -1,6 +1,7 @@
 package org.example.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
@@ -56,6 +57,7 @@ public class User implements Serializable {
     private String userUrl;
 
     @ApiModelProperty(value = "逻辑删除")
+    @TableLogic
     private Integer deleted;
 
 

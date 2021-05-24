@@ -95,6 +95,11 @@
       <artifactId>beetl</artifactId>
       <version>3.3.2.RELEASE</version>
     </dependency>
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-core</artifactId>
+      <version>5.5.4</version>
+    </dependency>
   </dependencies>
 
   <build>

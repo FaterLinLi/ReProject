@@ -2,6 +2,7 @@ package org.example.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -56,6 +58,14 @@ public class UserController {
         }
     }
 
+    //用户分页查询
+    @GetMapping("/page/{pageNum}")
+    public List<User> queryUserList(@PathVariable long pageNum){
+        Page<User> page = new Page<>(pageNum, 5);
+        userMapper.selectPage(page,null);
+        return page.getRecords();
+    };
+
 
     @Resource
     private UserMapper userMapper;
@@ -81,5 +91,13 @@ public class UserController {
             throw new BankAppException(ResultCode.ERROR, MessageCode.USER.REGISTER.NULL);
         return user;
     }
+
+    //逻辑删除
+    @PutMapping("/delete/{userId}")
+    public String deleteUserById(@PathVariable String userId){
+        userMapper.deleteById(userId);
+        return "Delete Success!";
+    }
+
 
 }
