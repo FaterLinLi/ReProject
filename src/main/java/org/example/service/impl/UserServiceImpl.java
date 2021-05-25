@@ -62,39 +62,39 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
 
         //生成唯一ID
-        GetOneId getOneId = new GetOneId("user","user_name",8);
+        GetOneId getOneId = new GetOneId("user",8);
         String onlyId = getOneId.GetOnlyId();
         QueryWrapper<User> wrapper_id = new QueryWrapper<>();
-        wrapper_id.eq("user_name",onlyId);
+        wrapper_id.eq("user_id",onlyId);
         User user_id = userMapper.selectOne(wrapper_id);
         if (user_id != null){
             onlyId = getOneId.GetOnlyId();
             user_id = userMapper.selectOne(wrapper_id);
         }
-        try{
-            //注册成功，插入数据
-            User user = new User();
-            user.setUserId(onlyId);
-            user.setUserName(registerPar.getUserName());
-            user.setUserPwd(MD5.encrypt(registerPar.getFirstPassword()));
-            int result = userMapper.insert(user);
-        }
-        catch (Exception e){
-            throw new BankAppException(ResultCode.ERROR,MessageCode.USER.REGISTER.ERROR);
-        }
-        return true;
-
-//        //注册成功，插入数据
-//        User user = new User();
-//        user.setUserId(onlyId);
-//        user.setUserName(registerPar.getUserName());
-//        user.setUserPwd(MD5.encrypt(registerPar.getFirstPassword()));
-//        int result = userMapper.insert(user);
-//        if (result < 1){
-//            return false;
-//        }else {
-//            return true;
+//        try{
+//            //注册成功，插入数据
+//            User user = new User();
+//            user.setUserId(onlyId);
+//            user.setUserName(registerPar.getUserName());
+//            user.setUserPwd(MD5.encrypt(registerPar.getFirstPassword()));
+//            int result = userMapper.insert(user);
 //        }
+//        catch (Exception e){
+//            throw new BankAppException(ResultCode.ERROR,MessageCode.USER.REGISTER.ERROR);
+//        }
+//        return true;
+
+        //注册成功，插入数据
+        User user = new User();
+        user.setUserId(onlyId);
+        user.setUserName(registerPar.getUserName());
+        user.setUserPwd(MD5.encrypt(registerPar.getFirstPassword()));
+        int result = userMapper.insert(user);
+        if (result < 1){
+            return false;
+        }else {
+            return true;
+        }
     }
 
     @Override

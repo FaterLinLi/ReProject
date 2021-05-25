@@ -92,5 +92,13 @@ public interface MessageCode{
         }
 
     }
+    interface Tesk{
+
+        interface UPLOAD{
+            String PAYMENT_NEED = "用户积分不足，请及时充值！";
+            String TAG_NULL = "标签不能为空！";
+        }
+
+    }
 
 }

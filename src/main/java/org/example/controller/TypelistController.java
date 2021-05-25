@@ -2,18 +2,20 @@ package org.example.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.example.common.exception.BankAppException;
 import org.example.common.result.MessageCode;
 import org.example.common.result.ResultCode;
 import org.example.mapper.TypelistMapper;
 import org.example.pojo.Typelist;
 import org.example.pojo.parameter.AddType;
-import org.example.pojo.parameter.FindType;
+import org.example.pojo.parameter.ChangeTypePar;
 import org.example.service.TypelistService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -54,6 +56,32 @@ public class TypelistController {
         }
         return typelist;
     }
+
+    //修改类型
+    @RequestMapping("/change")
+    public String typeChange(@Valid @RequestBody ChangeTypePar changeTypePar){
+        if (typelistService.changeType(changeTypePar)){
+            return "Change type success!";
+        }else {
+            return "Change type false!";
+        }
+    }
+
+    //列表分页查询
+    @GetMapping("/find/page/{pageNum}")
+    public List<Typelist> queryTypeList(@PathVariable long pageNum){
+        Page<Typelist> page = new Page<>(pageNum, 20);
+        typelistMapper.selectPage(page,null);
+        return page.getRecords();
+    };
+
+    //删除类型
+    @PostMapping("/delete/{typeId}")
+    public String deleteTypeById(@PathVariable String typeId){
+        typelistMapper.deleteById(typeId);
+        return "Delete Success!";
+    }
+
 
 
 }

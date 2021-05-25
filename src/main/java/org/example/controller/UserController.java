@@ -61,7 +61,7 @@ public class UserController {
     //用户分页查询
     @GetMapping("/page/{pageNum}")
     public List<User> queryUserList(@PathVariable long pageNum){
-        Page<User> page = new Page<>(pageNum, 5);
+        Page<User> page = new Page<>(pageNum, 15);
         userMapper.selectPage(page,null);
         return page.getRecords();
     };

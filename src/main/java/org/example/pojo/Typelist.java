@@ -1,6 +1,7 @@
 package org.example.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
@@ -32,7 +33,7 @@ public class Typelist implements Serializable {
     private String typeName;
 
     @ApiModelProperty(value = "逻辑删除")
+    @TableLogic
     private Integer deleted;
-
 
 }

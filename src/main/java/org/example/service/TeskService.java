@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.pojo.Tesk;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.pojo.parameter.TeskUploadPar;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TeskService extends IService<Tesk> {
 
+    boolean teskUpload(TeskUploadPar teskUpdatePar);
 }

@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.pojo.Typelist;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.example.pojo.parameter.AddType;
+import org.example.pojo.parameter.ChangeTypePar;
 import org.example.pojo.parameter.FindType;
 
 import java.util.List;
@@ -21,5 +22,5 @@ public interface TypelistService extends IService<Typelist> {
     boolean addType(AddType addType);
 
 
-
+    boolean changeType(ChangeTypePar changeTypePar);
 }
