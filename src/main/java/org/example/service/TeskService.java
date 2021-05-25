@@ -3,6 +3,7 @@ package org.example.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.example.pojo.Tesk;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.pojo.parameter.PassTeskPar;
 import org.example.pojo.parameter.TeskCoursePar;
 import org.example.pojo.parameter.TeskUploadPar;
 
@@ -19,4 +20,7 @@ public interface TeskService extends IService<Tesk> {
     boolean teskUpload(TeskUploadPar teskUpdatePar);
 
     void pageCourseQuery(Page<Tesk> pageCourse, TeskCoursePar teskCoursePar);
+
+    boolean passTesk(String teskId);
+
 }

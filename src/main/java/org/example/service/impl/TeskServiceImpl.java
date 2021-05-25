@@ -9,10 +9,13 @@ import org.apache.poi.ss.formula.functions.T;
 import org.example.common.exception.BankAppException;
 import org.example.common.result.MessageCode;
 import org.example.common.result.ResultCode;
+import org.example.mapper.TeskpackMapper;
 import org.example.mapper.UserMapper;
 import org.example.pojo.Tesk;
 import org.example.mapper.TeskMapper;
+import org.example.pojo.Teskpack;
 import org.example.pojo.User;
+import org.example.pojo.parameter.PassTeskPar;
 import org.example.pojo.parameter.TeskCoursePar;
 import org.example.pojo.parameter.TeskUploadPar;
 import org.example.service.TeskService;
@@ -40,6 +43,8 @@ public class TeskServiceImpl extends ServiceImpl<TeskMapper, Tesk> implements Te
     private TeskMapper teskMapper;
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private TeskpackMapper teskpackMapper;
 
 
     @Override
@@ -164,4 +169,42 @@ public class TeskServiceImpl extends ServiceImpl<TeskMapper, Tesk> implements Te
         //最后调用selectPage方法，传入Page对象及queryWrapper对象
         baseMapper.selectPage(pageCourse,queryWrapper);
     }
+
+    @Override
+    public boolean passTesk(String teskId) {
+
+        Tesk tesk =  new Tesk();
+        tesk.setTeskId(teskId);
+        tesk.setState("1");
+        teskMapper.updateById(tesk);
+
+        int need_num = teskMapper.selectById(teskId).getNeedNum();
+
+        GetOneId getOneId = new GetOneId("pack",10);
+        Teskpack teskpack = new Teskpack();
+
+        int count = 1;
+
+        //按人数创建任务包
+        while (count <= need_num){
+            String OnlyId = getOneId.GetOnlyId();
+            teskpack.setTaskpackId(OnlyId);
+            teskpack.setTaskId(teskId);
+            int result = teskpackMapper.insert(teskpack);
+            if (result < 1){
+                return false;
+            }else {
+                count = count + 1;
+            }
+        }
+
+        //任务包链接图片
+
+
+
+//        System.out.println(need_num);
+
+        return true;
+    }
+
 }

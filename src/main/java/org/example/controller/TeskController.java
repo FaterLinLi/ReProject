@@ -11,15 +11,20 @@ import org.example.common.result.MessageCode;
 import org.example.common.result.R;
 import org.example.common.result.ResultCode;
 import org.example.mapper.TeskMapper;
+import org.example.pojo.DataJson;
 import org.example.pojo.Tesk;
 import org.example.pojo.User;
+import org.example.pojo.parameter.PassTeskPar;
 import org.example.pojo.parameter.TeskCoursePar;
 import org.example.pojo.parameter.TeskUploadPar;
 import org.example.service.TeskService;
+import org.example.util.UploadUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -80,14 +85,48 @@ public class TeskController {
 
     //逻辑删除
     @PutMapping("/delete/{teskId}")
-    public String deleteUserById(@PathVariable String teskId){
+    public String deleteTeskById(@PathVariable String teskId){
         teskMapper.deleteById(teskId);
         return "Delete Success!";
     }
 
     //任务审核通过
+    @PutMapping("/pass/{teskId}")
+    public String passTeskById(@PathVariable String teskId){
 
+//        Tesk tesk = new Tesk();
+//        tesk.setTeskId(teskId);
+//        tesk.setState("1");
+//        teskMapper.updateById(tesk);
+//        return  "Tesk Pass Success!";
 
+        if (teskService.passTesk(teskId)){
+            return "Tesk Pass Success!";
+        }else {
+            return "Tesk Pass Fail!";
+        }
+    }
+
+    @RequestMapping("/image")
+    @ResponseBody
+    public DataJson image(MultipartFile file){
+        //调用工具类完成文件上传
+        String imagePath = UploadUtils.upload(file);
+        System.out.println(imagePath);
+        DataJson dataJson = new DataJson();
+        if (imagePath != null){
+            //创建一个HashMap用来存放图片路径
+            HashMap hashMap = new HashMap();
+            hashMap.put("src",imagePath);
+            dataJson.setCode(0);
+            dataJson.setMsg("上传成功");
+            dataJson.setData(hashMap);
+        }else{
+            dataJson.setCode(0);
+            dataJson.setMsg("上传失败");
+        }
+        return dataJson;
+    }
 
 
 }
