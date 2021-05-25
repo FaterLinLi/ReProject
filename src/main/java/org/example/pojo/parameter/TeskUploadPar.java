@@ -1,12 +1,15 @@
 package org.example.pojo.parameter;
 
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -15,6 +18,13 @@ public class TeskUploadPar {
 
     @ApiModelProperty(value = "发布者ID")
     private String userId;
+
+    @ApiModelProperty(value = "发布时间")
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+
+    @ApiModelProperty(value = "结束时间")
+    private Date endTime;
 
     @ApiModelProperty(value = "任务标题")
     @NotBlank(message = "任务标题不能为空！")
@@ -28,7 +38,7 @@ public class TeskUploadPar {
     private String teskNeed;
 
     @ApiModelProperty(value = "任务类型")
-    private Integer teskType;
+    private String teskType;
 
     @ApiModelProperty(value = "用户等级限制，0为无限制")
     private Integer limitLevel;
@@ -36,11 +46,14 @@ public class TeskUploadPar {
     @ApiModelProperty(value = "用户信用限制，0为无限制")
     private Integer limitCredit;
 
-    @ApiModelProperty(value = "任务花费")
-    private Integer payment;
+    @ApiModelProperty(value = "图片数量")
+    private Integer picNum;
 
-    @ApiModelProperty(value = "所需人数")
-    private Integer needNum;
+//    @ApiModelProperty(value = "任务花费")
+//    private Integer payment;
+//
+//    @ApiModelProperty(value = "所需人数")
+//    private Integer needNum;
 
     @ApiModelProperty(value = "标签数（至少两个）")
     private Integer tagNum;

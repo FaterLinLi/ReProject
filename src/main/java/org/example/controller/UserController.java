@@ -11,6 +11,7 @@ import org.example.common.result.MessageCode;
 import org.example.common.result.R;
 import org.example.common.result.ResultCode;
 import org.example.mapper.UserMapper;
+import org.example.pojo.Tesk;
 import org.example.pojo.User;
 import org.example.pojo.parameter.LoginPar;
 import org.example.pojo.parameter.RegisterPar;
@@ -82,7 +83,6 @@ public class UserController {
 
     @GetMapping("/name/{uname}")
     @ApiOperation(value = "根据用户名查询用户对象", notes = "用户名称不能为空")
-    @ApiImplicitParam(name = "uname", value = "用户名称", required = true, dataType = "String", paramType = "path")
     public User queryUserByName(@PathVariable String uname){
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("user_name",uname);

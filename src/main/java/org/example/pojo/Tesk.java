@@ -2,7 +2,6 @@ package org.example.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -12,6 +11,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
@@ -52,16 +53,20 @@ public class Tesk implements Serializable {
     private String teskNeed;
 
     @ApiModelProperty(value = "任务类型")
-    private Integer teskType;
+    private String teskType;
 
     @ApiModelProperty(value = "任务状态：0为未开始；1为进行中；2为已完成；3为失败")
-    private Integer state;
+    private String state;
 
     @ApiModelProperty(value = "用户等级限制，0为无限制")
     private Integer limitLevel;
 
     @ApiModelProperty(value = "用户信用限制，0为无限制")
     private Integer limitCredit;
+
+    @ApiModelProperty(value = "图片数量")
+    @NotBlank(message = "至少上传一张图片！")
+    private Integer picNum;
 
     @ApiModelProperty(value = "任务花费")
     private Integer payment;
@@ -96,6 +101,5 @@ public class Tesk implements Serializable {
     @ApiModelProperty(value = "逻辑删除")
     @TableLogic
     private Integer deleted;
-
 
 }
