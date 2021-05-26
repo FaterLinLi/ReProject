@@ -101,4 +101,12 @@ public interface MessageCode{
 
     }
 
+    interface GetTesk{
+
+        String LEVEL_LIMIT = "用户等级不足！";
+        String CREDIT_LIMIT = "用户信誉值不足！";
+        String ALREADY_GET = "用户已承接相关任务!";
+
+    }
+
 }

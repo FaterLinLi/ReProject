@@ -14,6 +14,7 @@ import org.example.mapper.TeskMapper;
 import org.example.pojo.DataJson;
 import org.example.pojo.Tesk;
 import org.example.pojo.User;
+import org.example.pojo.parameter.GetTeskPar;
 import org.example.pojo.parameter.PassTeskPar;
 import org.example.pojo.parameter.TeskCoursePar;
 import org.example.pojo.parameter.TeskUploadPar;
@@ -104,6 +105,15 @@ public class TeskController {
             return "Tesk Pass Success!";
         }else {
             return "Tesk Pass Fail!";
+        }
+    }
+
+    @PutMapping("/get/{teskpackId}/{userId}")
+    public String getTeskById(@PathVariable String teskpackId, @PathVariable String userId){
+        if (teskService.getTesk(teskpackId,userId)){
+            return "承接成功";
+        }else {
+            return "承接失败";
         }
     }
 

@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.pojo.Piclist;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.example.pojo.parameter.AddPic;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PiclistService extends IService<Piclist> {
 
+    boolean add(AddPic addPic);
 }

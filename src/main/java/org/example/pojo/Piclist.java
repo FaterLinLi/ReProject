@@ -31,6 +31,8 @@ public class Piclist implements Serializable {
     @ApiModelProperty(value = "任务ID")
     private String teskId;
 
+    private Integer inteskid;
+
     @ApiModelProperty(value = "图片链接")
     private String picUrl;
 
@@ -44,6 +46,12 @@ public class Piclist implements Serializable {
     private Float picTag04;
 
     private Float picTag05;
+
+    private String pack01;
+
+    private String pack02;
+
+    private String pack03;
 
 
 }

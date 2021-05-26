@@ -48,7 +48,7 @@ public class Teskpack implements Serializable {
     private Integer teskpackPay;
 
     @ApiModelProperty(value = "任务包权重")
-    private Float teskpackWeight;
+    private Double teskpackWeight;
 
     @ApiModelProperty(value = "任务状态：0为未承接；1为未开始；2为进行中；3为已完成；4为已失败")
     private Integer teskpackState;
